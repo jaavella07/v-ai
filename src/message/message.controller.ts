@@ -1,25 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, NotFoundException, Post } from '@nestjs/common';
+import { UsersService } from 'src/users/users.service';
 import { MessageService } from './message.service';
-import { CreateMessageDto } from './dto/create-message.dto';
-
 
 @Controller('message')
 export class MessageController {
-  constructor(private readonly messageService: MessageService) {}
 
-  @Post()
-  create(@Body() createMessageDto: CreateMessageDto) {
-    return this.messageService.create(createMessageDto);
-  }
+    constructor(
+        private messageService: MessageService,
+        private usersService: UsersService,
+    ) { }
 
-  @Get()
-  findAll() {
-    return this.messageService.findAll();
-  }
+    @Post()
+    async createMessage(
+        @Body('user_id') userId: string,
+        @Body('message') content: string,
+    ) {
+        const user = await this.usersService.findById(userId);
+        if (!user) throw new NotFoundException('Usuario no encontrado');
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.messageService.findOne(+id);
-  }
-
+        return this.messageService.createMessage(user, content);
+    }
 }

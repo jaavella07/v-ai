@@ -8,8 +8,11 @@ export class Message {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'text' })
-    message: string;
+    @Column('text')
+    content: string;
+
+    @Column('text')
+    response: string;
 
     @Column({ name: 'is_triggered', default: false })
     isTriggered: boolean;
