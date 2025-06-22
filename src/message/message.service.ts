@@ -38,11 +38,11 @@ export class MessageService {
         return this.messagesRepository.save(message);
     }
 
-    // async getHistory(userId: number): Promise<Message[]> {
-    //     return this.messagesRepository.find({
-    //         where: { user: { id: userId } },
-    //         relations: ['user'],
-    //     });
-    // }
+    async getHistory(userId: string): Promise<Message[]> {
+        return this.messagesRepository.find({
+            where: { user: { id: userId } },
+            relations: ['user'],
+        });
+    }
 
 }

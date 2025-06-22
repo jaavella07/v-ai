@@ -1,4 +1,4 @@
-import { Body, Controller, NotFoundException, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Post, Query } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { MessageService } from './message.service';
 
@@ -16,8 +16,14 @@ export class MessageController {
         @Body('message') content: string,
     ) {
         const user = await this.usersService.findById(userId);
+        console.log(userId, content);
         if (!user) throw new NotFoundException('Usuario no encontrado');
 
         return this.messageService.createMessage(user, content);
     }
+    @Get('history')
+    async getHistory(@Query('user_id') userId: string) {
+        return this.messageService.getHistory(userId);
+    }
+
 }

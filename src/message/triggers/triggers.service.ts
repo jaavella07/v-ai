@@ -8,7 +8,7 @@ export class TriggersService {
   constructor(private emailService: EmailService) {}
 
   checkTrigger(content: string): boolean {
-    const TRIGGER_WORDS = ['email', 'factura', 'recibo'];
+    const TRIGGER_WORDS = ['email'];
     const hasTrigger = TRIGGER_WORDS.some(word => 
       content.toLowerCase().includes(word)
     );
