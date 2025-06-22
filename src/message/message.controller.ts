@@ -21,7 +21,7 @@ export class MessageController {
 
         return this.messageService.createMessage(user, content);
     }
-    @Get('history')
+    @Get('/history')
     async getHistory(@Query('user_id') userId: string) {
         return this.messageService.getHistory(userId);
     }
