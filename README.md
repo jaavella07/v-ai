@@ -27,15 +27,19 @@ Esta API permite gestionar usuarios y enviar mensajes, integrándose con OpenAI 
 ## Herramientas
 - NodeJS (Framework NestJS)
 - npm manejador de paquetes 
-- PostgreSQL 
+- PostgreSQL (Imagen Docker)
 
-## Instalación
-Para instalar las dependencias del proyecto, ejecuta el siguiente comando en la raíz del proyecto:
+## Configuracion e Instalación  
+
+Para clonar e instalar las dependencias del proyecto, ejecuta los siguientes comandos:
+
+```bash
+$ git clone https://github.com/jaavella07/v-ai
+```
 
 ```bash
 $ npm install
 ```
-
 ## Compilacion
 
 ```bash
@@ -44,9 +48,11 @@ $ npm run start
 ```
 
 ## Dev
+
 ```bash
-1. Instalar dependencias
-2. Crear un archivo `.env` basado en el `env.template`
+1. Clonar repositorio
+2. Instalar dependencias
+3. Crear un archivo `.env` basado en el `env.template`
 4. Ejecutar migración de postgres 
 5. Levantar el servidor Dockert
    docker compose up -d
@@ -57,23 +63,30 @@ $ npm run start
 
 ```bash
 Crear Usuario  (createUser)
-
   http://localhost:3000/users
+```
 
+```bash
 Ver todos Usuarios (findAll)
-
   http://localhost:3000/users
+```
 
+```bash
 Ver Usuario por ID (findByID)
-
 (http://localhost:3000/users/:id)
+```
 
+```bash
 Crear Usuario  (createMessage)
-
   http://localhost:3000/message
+```
 
+```bash
 Historial de Mensajes (getHistory)
-
   http://localhost:3000/message/history?user_id=?
+```
 
+```bash
+Estadistica por usuario (getStatus)
+  http://localhost:3000/message/status?user_id=?
 ```
