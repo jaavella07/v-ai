@@ -3,7 +3,6 @@ import { UserChannel } from "src/enums";
 
 export class CreateUserDto {
 
-
     @IsString()
     @IsNotEmpty()
     name: string;

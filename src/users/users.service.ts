@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { validate as uuidValidate } from 'uuid';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -20,12 +21,19 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  findAll(){
+  findAll() {
     return this.userRepository.find();
   }
 
-   async findById(id: string) {
-     return this.userRepository.findOneBy({id});
-   }
+  async findById(id: string) {
+
+    if (!uuidValidate(id)) {
+      console.warn(`Intento de búsqueda con ID inválido: ${id}`);
+      return null; 
+    }
+    return this.userRepository.findOne({
+      where: { id }
+    });
+  }
 
 }
