@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
-import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
@@ -13,8 +12,6 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-   private configService: ConfigService,
-
 
   ) { }
 
@@ -30,6 +27,5 @@ export class UsersService {
    async findById(id: string) {
      return this.userRepository.findOneBy({id});
    }
-
 
 }

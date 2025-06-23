@@ -8,9 +8,7 @@ export class OpenAIService {
   private openai: OpenAI;
 
   constructor(private configService: ConfigService) {
-    this.openai = new OpenAI({
-      apiKey: this.configService.get<string>('OPENAI_API_KEY'),
-    });
+    this.openai = new OpenAI({ apiKey: this.configService.get<string>('OPENAI_API_KEY') });
   }
 
   async generateResponse(prompt: string): Promise<string> {

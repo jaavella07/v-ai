@@ -11,18 +11,18 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: configService.get('EMAIL_USER'),
-        pass: configService.get('EMAIL_PASSWORD'),
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
       },
     });
   }
 
-  async sendNotification(): Promise<void> {
+  async sendNotification(userEmail: string): Promise<void> {
     await this.transporter.sendMail({
       from: '"V-AI Support" <support@v-ai.com>',
-      to: 'admin@v-ai.com',
-      subject: 'Nueva solicitud de factura',
-      text: 'Se activó un trigger para envío de factura',
+      to: userEmail,
+      subject: 'Confirmación de tu solicitud',
+      text: 'Hemos recibido tu solicitud y estamos procesándola.',
     });
   }
 }

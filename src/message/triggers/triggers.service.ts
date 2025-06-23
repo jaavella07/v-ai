@@ -4,20 +4,17 @@ import { EmailService } from 'src/shared';
 
 @Injectable()
 export class TriggersService {
-    
-  constructor(private emailService: EmailService) {}
 
-  checkTrigger(content: string): boolean {
-    const TRIGGER_WORDS = ['email'];
-    const hasTrigger = TRIGGER_WORDS.some(word => 
-      content.toLowerCase().includes(word)
-    );
+  constructor(private emailService: EmailService) { }
 
+  async checkTrigger(content: string,userEmail: string): Promise<boolean> {
+
+    const hasTrigger = content.toLowerCase().includes('email');
     if (hasTrigger) {
-      // Lógica adicional (ej: enviar email)
-      this.emailService.sendNotification();
+      
+      await this.emailService.sendNotification(userEmail)
+      return true;
     }
-
-    return hasTrigger;
+    return false;
   }
 }

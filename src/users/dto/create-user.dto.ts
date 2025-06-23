@@ -9,7 +9,7 @@ export class CreateUserDto {
     name: string;
 
     @IsEmail()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'El correo es obligatorio.' })
     email: string;
 
     @IsEnum(UserChannel)

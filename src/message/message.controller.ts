@@ -16,7 +16,7 @@ export class MessageController {
         @Body('message') content: string,
     ) {
         const user = await this.usersService.findById(userId);
-        console.log(userId, content);
+        // console.log(userId, content);
         if (!user) throw new NotFoundException('Usuario no encontrado');
 
         return this.messageService.createMessage(user, content);

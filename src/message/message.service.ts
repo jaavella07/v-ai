@@ -6,8 +6,6 @@ import { TriggersService } from './triggers/triggers.service';
 import { OpenAIService } from 'src/shared/openai/openai.service';
 import { User } from 'src/users/entities/user.entity';
 
-
-
 @Injectable()
 export class MessageService {
 
@@ -19,15 +17,13 @@ export class MessageService {
     ) { }
 
     async createMessage(user: User, content: string): Promise<Message> {
-        // 1. Procesar triggers
-        const isTriggered = this.triggersService.checkTrigger(content);
 
-        // 2. Generar respuesta
+        const isTriggered = await this.triggersService.checkTrigger(content, user.email);
+
         const response = isTriggered
             ? "Recibimos tu solicitud. En breve recibirás un email."
             : await this.openAIService.generateResponse(content);
 
-        // 3. Guardar mensaje
         const message = this.messagesRepository.create({
             content,
             response,
