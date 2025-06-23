@@ -61,32 +61,32 @@ $ npm run start
 
 ## Endpoints
 
-```bash
 Crear Usuario  (createUser)
+```bash
   http://localhost:3000/users
 ```
 
-```bash
 Ver todos Usuarios (findAll)
+```bash
   http://localhost:3000/users
 ```
 
-```bash
 Ver Usuario por ID (findByID)
+```bash
 (http://localhost:3000/users/:id)
 ```
 
-```bash
 Crear Usuario  (createMessage)
+```bash
   http://localhost:3000/message
 ```
 
-```bash
 Historial de Mensajes (getHistory)
+```bash
   http://localhost:3000/message/history?user_id=?
 ```
 
-```bash
 Estadistica por usuario (getStatus)
+```bash
   http://localhost:3000/message/status?user_id=?
 ```
